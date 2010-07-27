@@ -74,7 +74,7 @@ class TAKANA_mainform
     begin
       @glade['tvResponce'].buffer.text = ''
       otext.each{|tlt|
-        @glade['tvResponce'].buffer.text += tlt.text+"\n"
+        @glade['tvResponce'].buffer.text += tlt+"\n"
       }
       @glade['lEtc'].text = "( showing your "+msg+" )"
     rescue

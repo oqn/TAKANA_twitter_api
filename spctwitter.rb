@@ -23,19 +23,40 @@ class TAKAKI
     @client = Twitter::Base.new(oauth)
   end
 
+  ###################################################
+  ### put 　　                                    ###
+  ###################################################
   def tweet(text)
     @client.update(text)
   end
-  
+
+
+  ###################################################
+  ### get 　　                                    ###
+  ###################################################
   def ftimeline
-    @client.friends_timeline
+    tl2string @client.friends_timeline
   end
 
   def replies
-    @client.mentions
+    tl2string @client.mentions    
   end
 
   def utimeline
-    @client.user_timeline
+    tl2string @client.user_timeline
   end
+
+
+  private
+  def tl2string(timeLines)
+    ret = []
+    timeLines.each do |tl|
+      ret << "@" + tl.user.screen_name + " : "+ tl.text
+    end
+    return ret
+  end
+
+
 end
+
+
