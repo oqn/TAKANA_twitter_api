@@ -35,11 +35,11 @@ class TAKAKI
   ### get 　　                                    ###
   ###################################################
   def ftimeline
-    tl2string @client.friends_timeline
+    tl2string @client.friends_timeline({'count' => '50'})
   end
 
   def replies
-    tl2string @client.mentions    
+    tl2string @client.mentions
   end
 
   def utimeline
