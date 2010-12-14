@@ -17,10 +17,21 @@ class TAKAKI
     access_token_key = f.readline.chomp
     access_secret = f.readline.chomp
     
-    oauth = Twitter::OAuth.new(consumer_token_key, consumer_secret)
-    oauth.authorize_from_access(access_token_key, access_secret)
+#    p consumer_token_key
+#    p consumer_secret
 
-    @client = Twitter::Base.new(oauth)
+    # oauth = Twitter::OAuth.new(consumer_token_key, consumer_secret)
+    # oauth.authorize_from_access(access_token_key, access_secret)
+    
+    Twitter.configure do |config|
+      config.consumer_key = consumer_token_key
+      config.consumer_secret = consumer_secret
+      config.oauth_token = access_token_key
+      config.oauth_token_secret = access_secret
+    end
+    
+    @client = Twitter
+
   end
 
   ###################################################
@@ -35,7 +46,7 @@ class TAKAKI
   ### get 　　                                    ###
   ###################################################
   def ftimeline
-    tl2string @client.friends_timeline({'count' => '50'})
+    tl2string @client.friends_timeline({'count' => '20'})
   end
 
   def replies
